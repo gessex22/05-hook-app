@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect, useState } from "react";
 
+const localCache = () => {};
+
 export const useFetch = (url) => {
   const [state, setState] = useState({
     data: null,
@@ -13,20 +15,28 @@ export const useFetch = (url) => {
     getFetch();
   }, [url]);
 
-
-  const setLoadingState =()=>{
-  setState({
-    data:null,
-    isLoading: true,
-    hasError: false,
-    error: null
-  })
-  
-  }
-
+  const setLoadingState = () => {
+    setState({
+      data: null,
+      isLoading: true,
+      hasError: false,
+      error: null,
+    });
+  };
 
   const getFetch = async () => {
-  setLoadingState()
+    if (localCache[url]) {
+      console.log("using cache");
+      setState({
+        data: localCache[url],
+        isLoading: false,
+        hasError: false,
+        error: null,
+      });
+      return;
+    }
+
+    setLoadingState();
     const resp = await fetch(url);
 
     if (!resp.ok) {
@@ -39,7 +49,7 @@ export const useFetch = (url) => {
           message: resp.statusText,
         },
       });
-      return
+      return;
     }
     const data = await resp.json();
 
@@ -47,17 +57,16 @@ export const useFetch = (url) => {
       data,
       isLoading: false,
       hasError: false,
-      error:  null
-    
-    })
+      error: null,
+    });
+
+    //manage local cache
+    localCache[url] = data;
   };
 
-  
-
-  return{
-  data: state.data,
-  isLoading: state.isLoading,
-  hasError: state.hasError
-  
-  }
+  return {
+    data: state.data,
+    isLoading: state.isLoading,
+    hasError: state.hasError,
+  };
 };

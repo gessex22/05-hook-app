@@ -1,10 +1,10 @@
 import React from "react";
 import { useFetch } from "../hooks/useFetch";
 import { useCounter } from "../hooks/useCounter";
-import { LoadingMessage } from "./LoadingMessage";
-import { PockemonCard } from "./PockemonCard";
+import { LoadingMessage } from "../03-examples/LoadingMessage";
+import { PockemonCard } from "../03-examples/PockemonCard";
 
-export const MultipleCustomHook = () => {
+export const Layout = () => {
   const { counter, increment, decrease } = useCounter(1);
   const { data, hasError, isLoading } = useFetch(
     `https://pokeapi.co/api/v2/pokemon/${counter}`
@@ -28,6 +28,7 @@ export const MultipleCustomHook = () => {
           ]}
         />
       )}
+
 
       <button
         onClick={() => (counter > 1 ? decrease() : null)}
