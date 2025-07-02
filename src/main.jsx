@@ -14,6 +14,9 @@ import { CallBackHook } from './06-memos/CallBackHook'
 import { Padre } from './07-tarea-memo/07-tarea-memo/Padre'
 // import { HookApp } from './HooksApp'
 
+import './08-useReducer/intro-reducer'
+
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
    <Padre/>
