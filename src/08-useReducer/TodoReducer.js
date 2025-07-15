@@ -1,9 +1,12 @@
-export const todoReducer = (initialState, action)=>{
+
+
+
+
+export const todoReducer = (initialState = [] , action)=>{
 
 switch (action.type) {
-    case 'ABC':
-        throw new Error('Action.type = ABC no esta siendo implementada')
-        break;
+    case '[add] add Todo':
+        return [...initialState, action.payload]
     
 
 
