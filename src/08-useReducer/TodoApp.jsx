@@ -11,33 +11,22 @@ const initialState = [
   },
 ];
 
-
-
-const init = ()=>( JSON.parse(localStorage.getItem('todos')) || [] )
-
+const init = () => JSON.parse(localStorage.getItem("todos")) || [];
 
 export const TodoApp = () => {
   const [todos, dispatch] = useReducer(todoReducer, initialState, init);
 
   useEffect(() => {
-    localStorage.setItem('todos',JSON.stringify(todos))
-  
-
-  }, [todos])
-  
-
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   const handleNewTodo = (todo) => {
+    const action = {
+      type: "[add] add Todo",
+      payload: todo,
+    };
 
-  const action = {
-    type : '[add] add Todo',
-    payload: todo
-  }
-
-  dispatch(action)
-
-
-
+    dispatch(action);
   };
 
   return (
@@ -55,7 +44,7 @@ export const TodoApp = () => {
           <h4> Agregar Todo</h4>
           <hr />
 
-          {<TodoAdd onNewTodo={ handleNewTodo} />}
+          {<TodoAdd onNewTodo={handleNewTodo} />}
         </div>
       </div>
     </>
