@@ -2,56 +2,21 @@ import { useEffect, useReducer } from "react";
 import { todoReducer } from "./TodoReducer";
 import { ToDoList } from "./components/TodoList";
 import { TodoAdd } from "./components/TodoAdd";
+import { useTodo } from "./components/useTodo";
 
-const initialState = [
-  {
-    id: new Date().getTime(),
-    description: "Collect alma gem",
-    done: false,
-  },
-];
 
-const init = () => JSON.parse(localStorage.getItem("todos")) || [];
+
+
 
 export const TodoApp = () => {
-  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+ 
 
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
-  const handleNewTodo = (todo) => {
-    const action = {
-      type: "[add] add Todo",
-      payload: todo,
-    };
-
-    dispatch(action);
-  };
-
-
-
-  const handleToggleTodo = (id) =>{
-  
-   const action = {
-    type: '[slc] select todo',
-    payload: id
-   }
-
-   dispatch( action)
-  }
-
-  const handleDeleteTodo = (id) => {
-    dispatch({
-      type: "[rm] delete ToDo",
-      payload: id,
-    });
-  };
-
+  const { todos, todosCount, pendingTodos, handleDeleteTodo, handleNewTodo, handleToggleTodo }= useTodo( )
+ 
   return (
     <>
       <h1>
-        Todo App: 10 <small> pendientes: 2 </small>
+      Todo App: {todosCount} <small> pendientes:  {pendingTodos} </small>
       </h1>
       <hr />
 
