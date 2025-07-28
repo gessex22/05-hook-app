@@ -5,6 +5,7 @@ import { AboutPage } from "./AboutPage";
 import { Navbar } from "./Component/Navbar";
 import { UserProvider } from "./Context/UserProvider";
 
+
 export const MainApp = () => {
   return (
     <UserProvider>
