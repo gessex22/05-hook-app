@@ -50,7 +50,7 @@ describe("Pruebas en MulktipleCustomHook", () => {
     render(<MultipleCustomHook />);
     expect(screen.getByText("#4 - Pikachu"));
 
-    screen.debug();
+    //screen.debug();
   });
 
   test("Should call the increase function ", () => {
