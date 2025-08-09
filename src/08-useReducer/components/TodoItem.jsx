@@ -9,6 +9,7 @@ export const ToDoItem = ({ NewItem, onDeleteTodo, onToggleTodo }) => {
             NewItem.done ? "text-decoration-line-through" : ""
           }`}
           onClick={() => onToggleTodo(NewItem.id)}
+          aria-label="span"
         >
           {NewItem.description}{" "}
         </span>
